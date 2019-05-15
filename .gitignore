@@ -19,6 +19,7 @@ HELP.md
 *.md
 *.cmd
 mvnw
+.mvn
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
