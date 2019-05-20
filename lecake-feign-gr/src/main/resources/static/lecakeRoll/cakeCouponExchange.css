@@ -1,0 +1,143 @@
+@charset "UTF-8";
+.main_cake_coupon_exchange .main {
+  background: #f9f9f9;
+  overflow: hidden;
+  padding: 20px;
+  background: url("../images/company/cakeCouponExchange/img_1.jpg") top center no-repeat;
+}
+.main_cake_coupon_exchange .main .outer {
+  padding-top: 475px;
+}
+.main_cake_coupon_exchange .main .outer .inner {
+  background: #f9f9f9;
+  padding: 16px;
+}
+.main_cake_coupon_exchange .main nav {
+  width: 1070px;
+  margin: 0 auto 20px;
+  border-bottom: 1px solid #be9a5e;
+}
+.main_cake_coupon_exchange .main nav a {
+  float: left;
+  width: 214px;
+  height: 90px;
+  line-height: 90px;
+  color: #9c9c9c;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+}
+.main_cake_coupon_exchange .main nav a.active {
+  color: #be9a5e;
+}
+.main_cake_coupon_exchange .main nav a.active:before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  margin-left: -6px;
+  border-left: 1px solid #be9a5e;
+  border-top: 1px solid #be9a5e;
+  background: #f5f5f5;
+  bottom: -6px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+.main_cake_coupon_exchange .main nav a.active span {
+  position: relative;
+}
+.main_cake_coupon_exchange .main nav a.active span:before {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 19px;
+  background: url("../images/company/cakeCouponExchange/card.png") center no-repeat;
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  background-size: 100% 100%;
+  left: -24px;
+  top: 50%;
+  margin-top: -9px;
+}
+.main_cake_coupon_exchange .main .p_item_new {
+  height: 380px;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info {
+  padding-top: 10px;
+  height: 120px;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .name_wrap {
+  height: auto;
+  max-height: 44px;
+  overflow: hidden;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .pro_text {
+  position: absolute;
+  width: 203px;
+  height: 55px;
+  left: 50%;
+  margin-left: -100px;
+  top: -35px;
+  background: url("../images/company/cakeCouponExchange/pop_bg_1.png") no-repeat center;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .pro_text.long {
+  width: 269px;
+  background: url("../images/company/cakeCouponExchange/pop_bg_2.png") no-repeat center;
+  margin-left: -135px;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .pro_text.long .text {
+  width: 255px;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .pro_text .text {
+  position: absolute;
+  width: 190px;
+  height: 32px;
+  top: 5px;
+  left: 7px;
+  line-height: 32px;
+  text-align: center;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .pro_text .text p {
+  display: inline-block;
+  font-size: 12px;
+  color: #be9a5e;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .proposal {
+  font-size: 12px;
+}
+.main_cake_coupon_exchange .main .p_item_new .p_info .buy_btn1 {
+  position: absolute;
+  padding: 10px 0;
+  left: 0;
+  bottom: 0;
+  color: #ff1b00;
+  z-index: 2;
+}
+.main_cake_coupon_exchange .main .bottom_text {
+  overflow: hidden;
+  background: white;
+  padding: 0 22px;
+  margin: auto;
+  width: 1200px;
+}
+.main_cake_coupon_exchange .main .bottom_text h4 {
+  color: #3e3e3e;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 40px 0 20px 0;
+}
+.main_cake_coupon_exchange .main .bottom_text p {
+  color: #3e3e3e;
+  line-height: 30px;
+  font-size: 16px;
+}
+.main_cake_coupon_exchange .main .bottom_text p span {
+  font-weight: bold;
+}
+.main_cake_coupon_exchange .main .bottom_text p:last-child {
+  margin-bottom: 80px;
+}

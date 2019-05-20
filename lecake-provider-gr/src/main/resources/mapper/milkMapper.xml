@@ -5,4 +5,7 @@
     <select id="queryTest" resultType="com.jk.pojo.Milk">
         select * from t_milk
     </select>
+    <insert id="addMilk">
+        insert into t_shop(mid,msid,scount) values (#{milk.mid},#{milkSpecification.specId},#{shop.scount})
+    </insert>
 </mapper>
