@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.CakeMapper">
+
+  <select id="queryCake" resultType="com.jk.model.LecakeCake" parameterType="java.lang.Integer">
+      select
+      c.cakeId as cakeId,
+      c.cakeImg as cakeImg,
+      c.cakeName as cakeName,
+      cn.price    as   price,
+      n.bulk    as bulk,
+      n.numberName as numberName,
+      n.sweetness as sweetness,
+      n.tableware as tableware,
+      n.weight    as weight,
+      f.flavorId  as flavorId,
+      f.flavorName as flavorName
+      FROM
+       cake_number cn  left join lecake_cake c  on  cn.cakeId=c.cakeId
+      left join lecake_number n  on cn.numberId= n.numberId
+      left join lecake_flavor f  on c.flavorId= f.flavorId
+      where 1=1
+      <if test="flavorId !=null and  flavorId != 0">
+        and  f.flavorId=#{flavorId}
+      </if>
+      <if test="numberId !=null and  numberId != 0">
+          and  cn.numberId=#{numberId}
+      </if>
+      GROUP BY c.cakeId
+  </select>
+
+    <select id="queryFlavor" resultType="com.jk.model.Flavor">
+        select
+        flavorId as flavorId,
+        flavorName as flavorName
+           from lecake_flavor
+    </select>
+
+    <select id="queryNumber" resultType="com.jk.model.CakeNumber">
+        select
+        numberId as numberId,
+        numberName as numberName
+           from lecake_number
+    </select>
+</mapper>
+

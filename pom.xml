@@ -12,8 +12,6 @@
         <module>lecake-common</module>
         <module>lecake-eureka</module>
         <module>lecake-zuul</module>
-        <module>lecake-common</module>
+        <module>lecake-cake-api</module>
     </modules>
-
-
 </project>
