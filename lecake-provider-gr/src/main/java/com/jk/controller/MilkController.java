@@ -1,8 +1,8 @@
 package com.jk.controller;
 
+import com.jk.pojo.LecakeCake;
 import com.jk.pojo.Milk;
-import com.jk.pojo.MilkSpecification;
-import com.jk.pojo.Shop;
+import com.jk.service.CakeService;
 import com.jk.service.MilkService;
 import com.jk.service.MilkServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,8 @@ public class MilkController implements MilkServiceApi {
 
     @Autowired
     private MilkService milkService;
+    @Autowired
+    private CakeService cakeService;
     @Override
     public List<Milk> queryTest() {
         List<Milk> milks=milkService.queryTest();
@@ -28,5 +30,10 @@ public class MilkController implements MilkServiceApi {
     @PostMapping
     public void addMilk(@RequestBody HashMap<String,Object> map) {
         milkService.addMilk(map);
+    }
+
+    @Override
+    public void addCake(@RequestBody LecakeCake lecakeCake) {
+        cakeService.addCake(lecakeCake);
     }
 }
