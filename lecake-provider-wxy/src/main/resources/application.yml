@@ -1,0 +1,38 @@
+
+server:
+
+  port: 8080
+
+eureka:
+
+  client:
+
+    serviceUrl:
+
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: service-customer
+
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    pool:
+      max-active: 8
+      min-idle: 0
+      max-idle: 8
+      max-wait: -1
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.146:3306/dangao?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+  thymeleaf:
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
