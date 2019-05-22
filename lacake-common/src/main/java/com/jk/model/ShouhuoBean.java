@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class ShouhuoBean implements Serializable {
     private static final long serialVersionUID = 4972118624151222385L;
 
-    private  Integer  id;
+    private  Integer  shouhuoid;
 
-    private  String   phone;//收货手机号
+    private  String   phonee;//收货手机号
 
     private  String   area;//收货地址
 
@@ -27,20 +27,20 @@ public class ShouhuoBean implements Serializable {
         this.userid = userid;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getShouhuoid() {
+        return shouhuoid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setShouhuoid(Integer shouhuoid) {
+        this.shouhuoid = shouhuoid;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhonee() {
+        return phonee;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhonee(String phonee) {
+        this.phonee = phonee;
     }
 
     public String getArea() {

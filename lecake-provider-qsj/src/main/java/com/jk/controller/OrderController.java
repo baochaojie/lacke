@@ -65,6 +65,10 @@ public class OrderController implements OrderServiceqsj {
     @Override
     public void savearea(@RequestBody ShouhuoBean shouhuoBean) {
 
+        if(shouhuoBean.getShouhuoid() != null){
+             orderDao.update(shouhuoBean);
+        }
+
         String youbian = shouhuoBean.getYoubian();
         if(youbian.equals("")){
             shouhuoBean.setYoubian(null);
@@ -79,6 +83,20 @@ public class OrderController implements OrderServiceqsj {
     public  UserBean queryuserid(@RequestParam("userid") String userid){
 
         return   orderDao.queryuserid(userid);
+    }
+
+    @RequestMapping("delcakeById")
+    @ResponseBody
+    @Override
+    public void delcakeById(@RequestParam("ids") Integer[] ids) {
+
+        orderDao.delcakeById(ids);
+
+    }
+
+    @Override
+    public ShouhuoBean queryCakeByid(@RequestParam("id") Integer id) {
+        return orderDao.queryCakeByid(id);
     }
 
 

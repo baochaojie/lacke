@@ -44,13 +44,67 @@
             columns:[
                 {field:'name',title:'收货人'},
                 {field:'youbian',title:'邮编'},
-                {field:'phone',title:'手机'},
+                {field:'phonee',title:'手机'},
                 {field:'area',title:'收货地址'},
                 {field:'123',title:"操作",formatter:function(value,row,index){
-
+                        return  '<a href="javascript:delOne('+row.shouhuoid+');">删除</a> | <a href="javascript:editOpen('+row.shouhuoid+');">修改</a>';
                 }}
             ]
         });
+    }
+    //修改
+    function  editOpen(id){
+        var  url = "http://localhost:8767/page/toeditpage";
+        oppenDialog(url);
+        $.ajax({
+            url:"http://localhost:8767/queryCakeByid",
+            type:"post",
+            data:{id:id},
+            dataType:"json",
+            success:function(data){
+                $("#shouhuoid").val(data.shouhuoid);
+                $("#area").val(data.area);
+                $("#phone").val(data.phonee);
+                $("#youbian").val(data.youbian);
+                $("#name").val(data.name);
+
+            }
+        })
+    }
+
+
+
+
+//删除
+    function  delOne(id){
+        delBook(id);
+    }
+    function  delBook(ids){
+        bootbox.confirm({
+            size: "small",
+            message: "你确定要删除这个数据吗?",
+            callback: function(result){
+                if(result){
+                    $.ajax({
+                        url:"http://localhost:8767/delcakeById",
+                        type:'post',
+                        data:{ids:ids},
+                        dataType:'json',
+                        success:function(data){
+                            if(data == true){
+                                $('#areaTable').bootstrapTable('refresh');
+                            }else{
+                                bootbox.alert({
+                                    size:"small",
+                                    title:"提示",
+                                    message:"删除失败"
+                                });
+                            }
+                        }
+                    })
+                }
+            }
+        })
     }
 
 
@@ -86,8 +140,9 @@
                             data:$("#bookForm").serialize(),
                             dataType:"json",
                             success:function(data){
-                                if(data){
-                                    searchBook();
+                                if(data == true){
+                                    alert(data);
+                                    shouhuoTable();
                                 }else{
                                     bootbox.alert({
                                         size:"small",
@@ -102,9 +157,7 @@
             }
         });
     }
-    function searchBook(){
-        $('#areaTable').bootstrapTable('refresh');
-    }
+
 
 
 
