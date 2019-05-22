@@ -1,0 +1,228 @@
+$(function () {
+    //主图轮播
+    new Swiper('#banner', {
+        autoplay: true,
+        speed: 800,
+        loop: true,
+        navigation: {
+            nextEl: '.next_btn',
+            prevEl: '.prev_btn'
+        }
+    });
+
+    var loadImgInSwiperArr = [];
+    //评论轮播
+    if ($('#comments .swiper-wrapper li').length > 1) {
+        new Swiper('#comments', {
+            speed: 800,
+            loop: false,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            on: {
+                slideChange: function () {
+                    loadImgInSwiper(this.activeIndex);
+                }
+            }
+        });
+    }
+    $('.swiper-slide-active .slideLazy').lazyload({
+        effect: 'fadeIn'
+    });
+
+    function loadImgInSwiper(activeIndex) {
+        if (activeIndex === 0) {
+            return;
+        }
+        if ($.inArray(activeIndex, loadImgInSwiperArr) === -1) {
+            setTimeout(function () {
+                $('.slideLazy').lazyload({
+                    effect: 'fadeIn', // 载入使用何种效果
+                    threshold: 12, // 提前开始加载
+                    container: $('#comments .swiper-slide-active')
+                });
+            }, 0);
+        }
+        loadImgInSwiperArr.push(activeIndex);
+    }
+
+
+    //2018.08.08 情人节弹窗
+    (function () {
+        var plat = 'pc',
+            flag = 'activity_180808',
+            key = flag + '_' + plat,
+            clearKey = 'clear_' + key;
+        if (utils.getQuery(clearKey)) {
+            sessionStorage.removeItem(key);
+        }
+        var val = sessionStorage.getItem(key);
+        if (!val) {
+            sessionStorage.setItem(key, 'isSet');
+            var dom = $('.' + flag);
+            dom.removeClass('hide').find('.close_btn').click(function () {
+                dom.remove();
+            });
+            var height = $(window).height() * .96,
+                _h = height > 610 ? 610 : height,
+                _w = _h * 600 / 610;
+            dom.find('.div_img').css({
+                width: _w + 'px',
+                height: _h + 'px'
+            }).removeClass('hide');
+        }
+    })();
+
+    //2018.11.06 领券
+    (function () {
+        var plat = 'pc',
+            flag = 'activity_181106',
+            key = flag + '_' + plat,
+            clearKey = 'clear_' + key;
+        if (utils.getQuery(clearKey)) {
+            localStorage.removeItem(key);
+        }
+        var val = localStorage.getItem(key);
+        if (!val) {
+            localStorage.setItem(key, 'isSet');
+            var dom = $('.' + flag);
+            dom.removeClass('hide').click(function () {
+                dom.remove();
+            }).find('.div_img').click(function (e) {
+                e.stopPropagation();
+            }).find('.close_btn').click(function () {
+                dom.remove();
+            });
+            setTimeout(function () {
+                dom.remove();
+            }, 10000);
+        }
+    })();
+
+    //2018.09.15 广东台风提示
+    (function () {
+        var cityAlias = cookie.get('CITY_ALIAS');
+        if (cityAlias === 'SH') {
+            $("#marquee").removeClass('hide').marquee({duration: 8000, delayBeforeStart: 0, pauseOnHover: true});
+        }
+    })();
+
+    //重庆首页
+    (function () {
+        if ($('.home_nav').length) {
+            var keys = ['gift', 'cakeCard', 'welfare', 'points'],
+                sections = keys.map(function (item) {
+                    var dom = $('[data-section="' + item + '"]');
+                    return {
+                        key: item,
+                        dom: dom,
+                        top: dom.offset().top
+                    };
+                });
+            //顶部复制
+            $('#globalHeader .header_content').append($('.home_nav').clone(true));
+            $(document).on('click', '.home_nav a', function () {
+                var me = $(this),
+                    target = me.attr('data-target');
+                var idx = $.inArray(target, keys),
+                    curSection = sections[idx];
+                $('[data-target="' + curSection.key + '"]').parent().addClass('active').siblings().removeClass('active');
+                $('html,body').animate({scrollTop: curSection.top - 61});
+            });
+            $(window).scroll(function () {
+                sections.forEach(function (item) {
+                    if (item.top <= $(window).scrollTop() + 62) {
+                        if (!$('html,body').is(":animated")) {
+                            $('[data-target="' + item.key + '"]').parent().addClass('active').siblings().removeClass('active');
+                        }
+                    }
+                });
+            });
+
+            $('.cake_card_section .cat_list p').click(function () {
+                var me = $(this),
+                    target = me.attr('data-price');
+                me.addClass('active').siblings().removeClass('active');
+                $('[data-card="' + target + '"]').removeClass('hide').siblings().addClass('hide');
+            });
+
+            //悦享与尊享列表点击兑换跳转到结算页
+            $('.welfare_section .buy_btn,.cake_card_section .buy_btn').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                var uid = $(this).parents('li').attr('data-id'),
+                    amount = 1;
+                app_js.buyItem(uid, amount, true);
+            });
+
+            //积分兑换商品需要检测登录
+            $('.points_section .buy_btn').click(function () {
+                if (!customerId) {
+                    location.href = '/customer/login.html';
+                    return;
+                }
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                var uid = $(this).parents('li').attr('data-id'),
+                    amount = 1;
+                app_js.buyItem(uid, amount);
+            });
+        }
+    })();
+
+    // 顶通
+    (function () {
+        var flag = 'activity_190508_ding_tong',
+            plat = 'pc',
+            key = flag + '_' + plat,
+            clearKey = 'clear_' + key,
+            dom = $('.' + flag);
+        if (utils.getQuery(clearKey)) {
+            sessionStorage.removeItem(key);
+        }
+        var val = sessionStorage.getItem(key);
+
+        dom.find('.close_btn').click(function (e) {
+            e.preventDefault();
+            dom.remove();
+        });
+
+        if (!val) {
+            sessionStorage.setItem(key, 'isSet');
+            dom.addClass('has_big');
+            setTimeout(function () {
+                dom.find('.link').addClass('active');
+                setTimeout(function () {
+                    dom.find('.big_img').remove();
+                    dom.find('.link').addClass('small');
+                }, 1100);
+            }, 5000);
+        }
+        dom.removeClass('hide');
+    })();
+
+    //北京点击牛奶banner同时购买牛奶和喵叽叽蛋糕
+    (function () {
+        var arr = [111290, 111449];
+        if (GlobalConfig.site_env === 'dev' || GlobalConfig.site_env === 'alpha') {
+            arr = [100801, 107415];
+        }
+        $(document).on('click', '#buyMilkInBj', function () {
+            app_js.buyItem([
+                {
+                    sku_id: arr[0],
+                    amount: 1,
+                    checked: 1
+                },
+                {
+                    sku_id: arr[1],
+                    amount: 1,
+                    checked: 1
+                }
+            ]);
+        });
+    })();
+});

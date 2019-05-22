@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.HeartMapper">
+<select id="toHeartBean" resultType="com.jk.pojo.HeartBean">
+  select * from heart_refreshments
+</select>
+    <select id="todangao" resultType="com.jk.pojo.LecakeCake">
+  select * from lecake_cake
+</select>
+    <select id="toselectid" parameterType="int" resultType="com.jk.pojo.HeartBean">
+  select * from heart_refreshments where refreshmentsid =#{refreshmentsid}
+</select>
+</mapper>

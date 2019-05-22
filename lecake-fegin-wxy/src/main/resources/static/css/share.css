@@ -1,0 +1,43 @@
+
+.share-dialog .share-dialog-title{
+    height: 45px;
+    line-height: 45px;
+    text-indent: 15px;
+    background: #eee;
+}
+.share-dialog .share-dialog-cont{
+    font-size: 14px;
+}
+
+.share-platform{
+    clear: both;
+    margin-top: 10px;
+}
+.share-platform .share-platform-l{
+    float: left;
+    width: 90px;
+}
+.share-platform-l img{
+    float: left;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+.share-platform .share-platform-r{
+    float: left;
+}
+.share-platform .bds_weixin{
+    background-image: url('../images/css-bg.png');
+    background-position: -13px -7px !important;
+}
+.share-platform .bds_tsina{
+    background-image: url('../images/css-bg.png');
+    background-position: -57px -7px !important;
+}
+.share-platform .bds_sqq{
+    background-image: url('../images/css-bg.png');
+    background-position: -101px -7px !important;
+}
+.share-platform .bds_qzone{
+    background-image: url('../images/css-bg.png');
+    background-position: -146px -7px !important;
+}

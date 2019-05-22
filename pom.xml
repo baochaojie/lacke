@@ -12,7 +12,9 @@
         <module>lecake-common</module>
         <module>lecake-eureka</module>
         <module>lecake-zuul</module>
-        <module>lecake-common</module>
+        <module>lecake-fegin-wxy</module>
+        <module>lecake-provider-wxy</module>
+        <module>lecake-service-api-wxy</module>
     </modules>
 
 
