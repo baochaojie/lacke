@@ -10,11 +10,5 @@ eureka:
 zuul:
   routes:
     api-a:
-      path: /api-a/**
-      serviceId: order-consumer1
-    api-b:
-      path: /api-b/**
-      serviceId: order-consumer2
-    order-consumer2:
-      path: /order-consumer2/**
-      serviceId: order-consumer2
+      path: /springcloud-feign-cake/**
+      serviceId: springcloud-feign-cake
