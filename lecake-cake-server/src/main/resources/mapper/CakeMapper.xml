@@ -9,6 +9,7 @@
       c.cakeName as cakeName,
       cn.price    as   price,
       n.bulk    as bulk,
+      n.numberId as numberId,
       n.numberName as numberName,
       n.sweetness as sweetness,
       n.tableware as tableware,
@@ -29,6 +30,44 @@
       GROUP BY c.cakeId
   </select>
 
+  <select id="queryById" resultType="com.jk.model.LecakeCake" parameterType="java.lang.Integer">
+      select
+      c.cakeId as cakeId,
+      c.cakeImg as cakeImg,
+      c.cakeName as cakeName,
+      cn.price    as   price,
+      n.bulk    as bulk,
+      n.numberId  as numberId,
+      n.numberName as numberName,
+      n.sweetness as sweetness,
+      n.tableware as tableware,
+      n.weight    as weight,
+      f.flavorId  as flavorId,
+      f.flavorName as flavorName
+      FROM
+       cake_number cn  left join lecake_cake c  on  cn.cakeId=c.cakeId
+      left join lecake_number n  on cn.numberId= n.numberId
+      left join lecake_flavor f  on c.flavorId= f.flavorId
+      where 1=1
+      and c.cakeId=#{cakeId}
+      <if test="numberId !=null and numberId !=0 ">
+          and  cn.numberId=#{numberId}
+      </if>
+
+       <if test="flavorId !=null and  flavorId !=0 ">
+        and  f.flavorId=#{flavorId}
+     </if>
+
+  </select>
+
+
+  <select id="queryNumberTwo" resultType="com.jk.model.CakeNumber" parameterType="java.lang.Integer">
+    select *FROM cake_number cn  left join lecake_cake c  on  cn.cakeId=c.cakeId
+     left join lecake_number n  on cn.numberId= n.numberId
+     where 1=1
+    and c.cakeId=#{cakeId}
+  </select>
+
     <select id="queryFlavor" resultType="com.jk.model.Flavor">
         select
         flavorId as flavorId,
@@ -42,5 +81,25 @@
         numberName as numberName
            from lecake_number
     </select>
+
+    <select id="queryPrice" resultType="com.jk.model.CakeNumber"  parameterType="java.lang.Integer">
+    select  c.cakeId as cakeId,
+      c.cakeImg as cakeImg,
+      c.cakeName as cakeName,
+      cn.price    as   price,
+      n.bulk    as bulk,
+      n.numberName as numberName,
+      n.sweetness as sweetness,
+      n.tableware as tableware,
+      n.weight    as weight
+    FROM
+     cake_number cn  left join lecake_cake c  on  cn.cakeId=c.cakeId
+     left join lecake_number n  on cn.numberId= n.numberId
+     where 1=1
+    and c.cakeId=#{cakeId}
+    and n.numberId=#{numberId}
+    </select>
+
+
 </mapper>
 

@@ -42,4 +42,29 @@ public class CakeController  implements CakeService{
        public List<CakeNumber> queryNumber() {
               return cakeMapper.queryNumber();
        }
+
+       @Override
+       @GetMapping("queryById")
+       @ResponseBody
+       public LecakeCake queryById(Integer cakeId,Integer numberId,Integer flavorId) {
+              System.out.println(cakeId+"+++"+numberId+"++++"+flavorId);
+              return cakeMapper.queryById(cakeId,numberId,flavorId);
+       }
+
+       @Override
+       @GetMapping("queryNumberTwo")
+       @ResponseBody
+       public List<CakeNumber> queryNumberTwo(Integer cakeId) {
+              System.out.println(cakeId);
+              return cakeMapper.queryNumberTwo(cakeId);
+       }
+
+       @Override
+       @GetMapping("queryPrice")
+       @ResponseBody
+       public CakeNumber queryPrice(Integer cakeId, Integer numberId) {
+              return cakeMapper.queryPrice(cakeId,numberId);
+       }
+
+
 }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- saved from url=(0045)https://www.lecake.com/shop/goods-103103.html -->
-<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
         <title>诺心蛋糕官网|诺心LE CAKE—诺心蛋糕网上订购</title>
     <meta name="Keywords" content="诺心蛋糕官网,诺心, 生日蛋糕订购，芝士蛋糕,慕斯蛋糕,草莓蛋糕，蛋糕网上订购，订蛋糕，网上订蛋糕">
@@ -160,41 +162,15 @@
         <section class="goods_detail clear_fix">
             <!-- 左边促销信息 -->
             <div class="f_left left_wrap">
-    <div class="title_wrap clear_fix">
-        <div class="clear_fix">
-            <h1 class="title f_left">
-                <span id="goodsTitle">雪域牛乳芝士蛋糕·浓4.9</span>
-                            </h1>
-            <div class="price_wrap f_right">
-                <p class="new_price">
-                    ¥<span id="goodsPrice">298</span>
-                </p>
-                                                                                    <p style="margin-left: 4px;" class="vip_price hide" id="goodsVipPrice">
-                            <span>￥0</span>
-                        </p>
-                                                                                                                                                                                    </div>
-        </div>
-                            <a href="https://www.lecake.com/aha/index.html" class="aha_entrance" data-statistics="aha_buy_detail|详情页开通aha按钮">
-                <img src="/cakeInfo_files/aha_link.png" alt="">
-                <span class="desc_text">开通仅¥99 预计可省¥371</span>
-            </a>
-                    </div>
+    <div class="title_wrap clear_fix"  id="cakeInfos">
+
+      </div>
         <div id="promotion" style="position: relative">
         <div class="promotion">
-                                                                                                    <h4><i></i>优惠促销</h4>
-                            <div style="padding: 0 19px" class="clear_fix">
-                                                                    <p class="tag f_left">+39元享啪啪脸蛋糕</p>
-                                                            </div>
-                            <h6>查看促销详情</h6>
+
                                                                                                                                                                                             </div>
         <div class="promotion promotion2 hide">
-                                                                                                    <h4></h4>
-                            <div class="brief_detail">
-                                                                    <div>
-                                        <p class="tag">+39元享啪啪脸蛋糕</p>
-                                        <h5>【“啪”你一脸大冒险】2019.1.10起，购买蛋糕馆内任意蛋糕，加39元可购价值88元的「啪啪脸蛋糕」1个，多买多得。配送时间：2019.1.12起。</h5>
-                                    </div>
-                                                            </div>
+
                                                                                                                                                                                             </div>
     </div>
 </div>            <!-- 右边规格选择 -->
@@ -203,61 +179,21 @@
     <!-- 顶部悬浮 -->
     <div class="goods_fixed hide">
         <div class="fixed_wrap">
-            <p class="goods_name">雪域牛乳芝士蛋糕·浓4.9</p>
-            <p class="goods_comment">用户评论<span class="comment_count">(42)</span></p>
-            <p class="goods_hot">热门推荐</p>
-            <p class="goods_price">
-                                                            <span class="price">
-                            <small>￥</small><i id="fixTopPrice">298</i>
-                        </span>
-                        <span class="people">(<i>2-4人食</i>)</span>
-                                                                                                                                                            </p>
-            <p class="add_cart_wrap">
-                                    <a href="javascript:void(0)" class="add_cart" id="cartAdd1" data-statistics="details_add_shopcar|加入购物车|1">加入购物车＋</a>
-                                            </p>
+
 
         </div>
     </div>
+                <div class="eat_num" >
+                    <p class="spec_notice">建议食用人数
+                    </p>
+                    <div class="clear_fix"  id="numberList">
 
-        <div class="eat_num">
-                            <p class="spec_notice">建议食用人数
-                            </p>
-                <div class="clear_fix">
-                            <a href="http://www.lecake.com/shop/goods-103103.html" class="  active">
-                    2-4人食                    <b></b>
-                </a>
-                            <a href="http://www.lecake.com/shop/goods-103104.html" class="  ">
-                    5-8人食                    <b></b>
-                </a>
-                            <a href="http://www.lecake.com/shop/goods-103105.html" class="  ">
-                    10-12人食                    <b></b>
-                </a>
-                            <a href="http://www.lecake.com/shop/goods-103106.html" class=" last ">
-                    15-20人食                    <b></b>
-                </a>
                     </div>
-    </div>
-            
-                        <div class="spec clear_fix">
-                                    <p class="tableware no_wrap">
-                        <i></i>
-                                                    含5套餐具
-                                            </p>
-                                                    <p class="size no_wrap">
-                        <i></i>
-                        约
-                        15                        x 15                        x 3                        cm
-                    </p>
-                                                    <p class="weight">
-                        <i></i>
-                        约545g
-                    </p>
-                                                    <p class="sweet" id="2">
-                        甜度：
-                        <i class="level_2"></i>
-                    </p>
-                            </div>
-                                                
+                </div>
+
+                <div class="spec clear_fix" id="canju">
+
+                </div>
 <!--重庆站点套餐-->
 
 <!--喵叽叽·元气宠溺礼包，喵叽叽·傲娇小花礼包-->
@@ -370,7 +306,7 @@
                 <a href="javascript:void(0)" class="nav next icon swiper-button-next"></a>
                 <div class="group_list swiper-container" id="groupList">
                     <ul class="swiper-wrapper">
-                        
+
                                                     <li class="group_item swiper-slide" data-uid="110364" data-price="49">
                                 <div class="img_wrap">
                                     <a target="_blank" href="https://www.lecake.com/shop/goods-110364.html">
@@ -789,6 +725,118 @@
     })();
 </script><iframe src="/cakeInfo_files/wapchat.html" id="qimoCustomService" style="position:fixed;z-index:999999;bottom:0;right:20px;height: 480px;width: 350px;" class="hide"></iframe><a href="javascript:void(0);" id="closeCustomerService" class="hide" style="position: fixed; width: 24px; height: 24px; z-index: 1000000; right: 300px; bottom: 442px; text-indent: -1000px; overflow: hidden; background: url(&quot;//newimgcdn.lapetit.cn/h5/images/customer/coupons/ico_close.png&quot;) center center / 100% 100% no-repeat;">关闭</a>
 
-<input type="text" value="${cakeId.cakeId}">
+<input type="text" id ="cakeId"   th:value="${cakeId}">
+<input type="text" id ="flavorId" th:value="${flavorId}">
+<input type="text" id ="numberId" th:value="${numberId}">
 
-</body></html>
+</body>
+
+<script>
+    $(function(){
+        var cakeId= $("#cakeId").val();
+        var numberId= $("#numberId").val();
+        var flavorId= $("#flavorId").val();
+        queryById(cakeId,numberId,flavorId);
+        queryNumber();
+        queryPrice(numberId);
+    })
+    function queryById (cakeId,numberId,flavorId){
+        //alert(cakeId);
+        $.ajax({
+            url:"/cakeweb/queryById",
+            type:"get",
+            data:{cakeId:cakeId,numberId:numberId,flavorId:flavorId},
+            success:function(data){
+                var html="";
+                html+="        <div class=\"clear_fix\">\n" +
+                    "            <h1 class=\"title f_left\">\n" +
+                    "                <span id=\"goodsTitle\">"+data.cakeName+"</span>\n" +
+                    "            </h1>\n" +
+                    "            <div class=\"price_wrap f_right\">\n" +
+                    "                <p class=\"new_price\">\n" +
+                    "                    ¥<span id=\"goodsPrice\">"+data.price+"</span>\n" +
+                    "                </p>\n" +
+                    "            </div>\n" +
+                    "        </div>";
+
+                $("#cakeInfos").html(html);
+
+            },error:function(){
+                alert("失败")
+            }
+
+        })
+
+
+
+    }
+
+    function queryNumber(){
+          var cakeId= $("#cakeId").val();
+           $.ajax({
+               url:"/cakeweb/queryNumberTwo",
+               type:"get",
+               data:{cakeId:cakeId},
+               success:function(data){
+                   var htm="";
+                   for(var i=0;i<data.length;i++){
+      htm+="  <a href=\"javascript:queryPrice("+data[i].numberId+")\"\n" +
+      "                   class=\"  last\">\n" +
+      "                   "+data[i].numberName+"  <b></b>\n" +
+      "                </a>" ;
+
+
+
+
+                   }
+                 $("#numberList").html(htm);
+               },error:function(){
+
+               }
+           })
+
+
+    }
+
+
+    function queryPrice(numberId){
+       alert(numberId);
+        var cakeId= $("#cakeId").val();
+        var flavorId= $("#flavorId").val();
+        queryById(cakeId,numberId,flavorId);
+       $.ajax({
+           url:"/cakeweb/queryPrice",
+           type:"get",
+           data:{cakeId:cakeId,numberId:numberId},
+           success:function(data){
+               alert(data.tableware);
+            var ht="";
+            ht+="     <p class=\"tableware no_wrap\">\n" +
+                "                        <i></i>\n" +
+                "      "+data.tableware+"\n" +
+                "            </p>\n" +
+                "        <p class=\"size no_wrap\">\n" +
+                "                        <i></i>\n" +
+                "                        约 "+data.bulk+"\n" +
+                "                    </p>\n" +
+                "                                                    <p class=\"weight\">\n" +
+                "                        <i></i>\n" +
+                "                        约"+data.weight+"g\n" +
+                "                    </p>\n" +
+                "                                                    <p class=\"sweet\" id=\"2\">\n" +
+                "                        甜度：\n" +
+                "                        "+data.sweetness+"\n" +
+                "                    </p>\n";
+
+             $("#canju").html(ht);
+           },error:function(){
+
+
+           }
+
+       })
+
+
+    }
+</script>
+</html>

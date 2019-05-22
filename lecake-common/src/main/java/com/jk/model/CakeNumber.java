@@ -5,7 +5,12 @@ public class CakeNumber {
      private  Integer  numberId;
      //ID
      private  Integer  flavorId;
-
+     //价格
+     private  Integer  price;
+     //名称
+     private  String   cakeName;
+     //Id
+     private  Integer   cakeId;
      //名称
      private  String  numberName;
      //餐具
@@ -53,6 +58,14 @@ public class CakeNumber {
         return weight;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
@@ -78,6 +91,7 @@ public class CakeNumber {
         return "CakeNumber{" +
                 "numberId=" + numberId +
                 ", flavorId=" + flavorId +
+                ", price=" + price +
                 ", numberName='" + numberName + '\'' +
                 ", tableware='" + tableware + '\'' +
                 ", bulk='" + bulk + '\'' +

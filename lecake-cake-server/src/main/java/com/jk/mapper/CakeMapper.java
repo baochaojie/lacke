@@ -25,4 +25,26 @@ public interface CakeMapper {
      * @return
      */
     List<CakeNumber> queryNumber();
+
+    /**
+     * 回显
+     * @param cakeId
+     * @return
+     */
+    LecakeCake queryById(@Param("cakeId") Integer cakeId,@Param("numberId")Integer numberId,@Param("flavorId")Integer flavorId);
+
+    /**
+     * 查询当前蛋糕下的种类 和价格
+     * @param cakeId
+     * @return
+     */
+    List<CakeNumber> queryNumberTwo(@Param("cakeId") Integer cakeId);
+
+    /**
+     *
+     * @param cakeId
+     * @param numberId
+     * @return
+     */
+    CakeNumber queryPrice(@Param("cakeId")Integer cakeId,@Param("numberId") Integer numberId);
 }

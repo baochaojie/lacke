@@ -13,10 +13,14 @@ public interface CakeService {
 
     @GetMapping("queryCake")
     List<LecakeCake> queryCake(@RequestParam("flavorId") Integer flavorId,@RequestParam("numberId")Integer numberId);
-
     @GetMapping("queryFlavor")
     List<Flavor> queryFlavor();
-
     @GetMapping("queryNumber")
     List<CakeNumber> queryNumber();
+    @GetMapping("queryById")
+    LecakeCake queryById(@RequestParam("cakeId")Integer cakeId, @RequestParam("numberId")Integer numberId,@RequestParam("flavorId") Integer flavorId);
+    @GetMapping("queryNumberTwo")
+    List<CakeNumber> queryNumberTwo(@RequestParam("cakeId")Integer cakeId);
+    @GetMapping("queryPrice")
+    CakeNumber queryPrice(@RequestParam("cakeId")Integer cakeId, @RequestParam("numberId")Integer numberId);
 }

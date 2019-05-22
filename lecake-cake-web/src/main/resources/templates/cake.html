@@ -402,7 +402,7 @@ function  queryNumber(){
                 var html ="";
                 for(var i=0;i<data.length;i++){
                     html+='     <li class="p_item_new rose  no_height" data-id="103103" data-isneedlinktodetail="" data-settlementonly="" data-hidespec="" data-items="雪域牛乳芝士蛋糕·浓4.9||https://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201812/13164/list_13164.jpg|http://www.lecake.com/shop/goods-103103.html|1|103103|13165|1|1|0||100041|建议食用人数|2-4人食|9|298|298|15|15|3.6|545|5||0|0|0||||||||@@雪域牛乳芝士蛋糕·浓4.9||https://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201812/13164/list_13164.jpg|http://www.lecake.com/shop/goods-103104.html|2|103104|13166|1|1|0||100003|建议食用人数|5-8人食|16|458|458|20|20|3.6|1090|10||0|0|0||||||||@@雪域牛乳芝士蛋糕·浓4.9||https://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201812/13164/list_13164.jpg|http://www.lecake.com/shop/goods-103105.html|3|103105|13167|1|1|0||100001|建议食用人数|10-12人食|25|680|680|25|25|3.6|1635|15||0|0|0||||||||@@雪域牛乳芝士蛋糕·浓4.9||https://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201812/13164/list_13164.jpg|http://www.lecake.com/shop/goods-103106.html|4|103106|13168|1|1|0||100000|建议食用人数|15-20人食|49|1120|1120|33|33|3.6|2725|20||0|0|0||||||||" data-goodssweet="2" data-goodstastetxt="雪域鲜乳 4.9">\n' +
-                        '            <a href="javascript:toInfo('+data[i].cakeId+')" target="_blank">\n' +
+                        '            <a href="javascript:toInfo('+data[i].cakeId+','+data[i].flavorId+','+data[i].numberId+')" target="_blank">\n' +
                         '                <div class="img_wrap">\n' +
                         '                    <div class="div_img">\n' +
                         '                                                    <img class="lazy" src="'+data[i].cakeImg+'" data-original="https://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201812/13164/list_13164.jpg?v=1555669191" style="display: block;">\n' +
@@ -411,7 +411,7 @@ function  queryNumber(){
                         '            </a>\n' +
                         '            <div class="p_info">\n' +
                         '                <div class="name_wrap">\n' +
-                        '                    <a href="javascript:toInfo('+data[i].cakeId+')" target="_blank">\n' +
+                        '                    <a href="javascript:toInfo('+data[i].cakeId+','+data[i].flavorId+','+data[i].numberId+')" target="_blank">\n' +
                         '                        <h3 class="auto_wrap p_name">'+data[i].cakeName+'</h3>\n' +
                         '                    </a>\n' +
                         '                    <div class="p_tag">\n' +
@@ -443,8 +443,15 @@ function  queryNumber(){
 
   }
 
-function toInfo(cakeId){
-     location.href="/page/tocakeinfo?cakeId="+cakeId;
+function toInfo(cakeId,flavorId,numberId){
+      alert(cakeId+"numberId=="+numberId+"flavorId=="+flavorId)
+    if(numberId ==null){
+        numberId=0;
+    }
+    if(flavorId ==null){
+        flavorId=0;
+    }
+    location.href="/page/tocakeinfo?cakeId="+cakeId+"&numberId="+numberId+"&flavorId="+flavorId;
 }
 
 </script>

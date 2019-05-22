@@ -43,4 +43,27 @@ public class CakeController  {
             return numberList;
       }
 
+      @RequestMapping("queryNumberTwo")
+      @ResponseBody
+      public List<CakeNumber> queryNumberTwo(@RequestParam("cakeId")Integer cakeId){
+          List <CakeNumber> numberList= cakeServiceWeb.queryNumberTwo(cakeId);
+            return numberList;
+      }
+      @RequestMapping("queryById")
+      @ResponseBody
+      public LecakeCake queryById(@RequestParam("cakeId")Integer cakeId,@RequestParam("numberId")Integer numberId,@RequestParam("flavorId")Integer flavorId){
+          System.out.println("cakeId==="+cakeId+"numberId=="+numberId+"flavorId="+flavorId);
+            LecakeCake cake= cakeServiceWeb.queryById(cakeId,numberId,flavorId);
+            return cake;
+      }
+
+      @RequestMapping("queryPrice")
+      @ResponseBody
+      public CakeNumber queryPrice(@RequestParam("cakeId")Integer cakeId,@RequestParam("numberId")Integer numberId){
+          System.out.println("1231");
+          CakeNumber cakeNumber= cakeServiceWeb.queryPrice(cakeId,numberId);
+          System.out.println(cakeNumber);
+            return cakeNumber;
+      }
+
 }
