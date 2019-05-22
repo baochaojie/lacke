@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的地址</title>
+    <script src="../jquery-1.9.1.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-table/bootstrap-table.css">
+    <script src="../bootstrap-table/bootstrap-table.js"></script>
+    <script src="../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="../bootbox/bootbox.all.min.js"></script>
+    <link rel="stylesheet" href="../bootStrap-addTabs/bootstrap.addtabs.css">
+    <script src="../bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<button onclick="openAdd()" type="button" class="btn btn-info">
+    <i class="glyphicon glyphicon-plus"></i>新增
+</button>
+<table class="table" id="areaTable"></table>
+</body>
+<script>
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+    $(function(){
+        shouhuoTable();
+    });
+    function shouhuoTable(){
+        $("#areaTable").bootstrapTable({
+            url:'http://localhost:8767/shouhuoinfo',
+            xhrFields: {
+                withCredentials: true
+            },
+            columns:[
+                {field:'name',title:'收货人'},
+                {field:'youbian',title:'邮编'},
+                {field:'phone',title:'手机'},
+                {field:'area',title:'收货地址'},
+                {field:'123',title:"操作",formatter:function(value,row,index){
+
+                }}
+            ]
+        });
+    }
+
+
+
+    function  openAdd(){
+        var  url = "http://localhost:8767/page/toaddpage";
+        oppenDialog(url);
+    }
+    function  oppenDialog(url){
+
+        var dialog = bootbox.dialog({
+            title: '新增地址',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "保存",
+                    className: 'btn-info',
+                    callback: function(){
+                        $.ajax({
+                            url:"http://localhost:8767/savearea",
+                            type:'post',
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            data:$("#bookForm").serialize(),
+                            dataType:"json",
+                            success:function(data){
+                                if(data){
+                                    searchBook();
+                                }else{
+                                    bootbox.alert({
+                                        size:"small",
+                                        title:"提示",
+                                        message:"新增失败"
+                                    });
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    }
+    function searchBook(){
+        $('#areaTable').bootstrapTable('refresh');
+    }
+
+
+
+
+</script>
+</html>

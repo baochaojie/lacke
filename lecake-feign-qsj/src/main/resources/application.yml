@@ -1,0 +1,17 @@
+
+server:
+  port:  8767
+
+spring:
+  application:
+    name: springcloud-feign-cake
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+eureka:
+  client:
+    service-url:
+      defalutZone: http://localhost:8761/eureka
+
