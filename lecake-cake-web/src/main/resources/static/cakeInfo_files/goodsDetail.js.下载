@@ -1,0 +1,706 @@
+var carouselSwiper = null,
+    milkDiyMessage = '请选择配送周期',  // 牛奶周周配制作提示
+    cakeInfo = null,  // 制作好的happcake||母亲节蛋糕详情大对象
+    isDigital = parseInt($('#goodsImg').attr('data-digital')) === 1;
+
+var milkDiyApp = null;                      //牛奶可选周周配对象
+
+//设置商品价格等信息
+function setGoodsInfo(data) {
+    data = data || {};
+    $('#fixTopPrice').text(data.salePrice);
+    $('#goodsPrice').text(data.salePrice);
+    $('#oldPrice').text('');
+    if (data.salePrice !== data.marketPrice) {
+        $('#oldPrice').text('¥' + data.marketPrice);
+    }
+    $('#goodsMarkupPrice').remove();
+    if (data.preferentialPrice > 0) {
+        $('#goodsPrice').parents('.new_price').after($('<p class="markup_price" style="margin-left: 2px;" id="goodsMarkupPrice">¥' + data.preferentialPrice + '</p>'));
+    }
+}
+
+$(function () {
+
+    /** 新雪域升级弹窗 **/
+
+    $('#upgradeXueyu a.close').click(function () {
+        $('#upgradeXueyu').addClass('hide');
+    });
+    hoverChange();
+
+    /** happycake && 母亲节蛋糕 制作 **/
+
+    (function () {
+        if (!isMilkDiy) {
+            var groupsArr = [], id_step1 = 0, id_step2 = 0, id_step3 = 0;
+
+            if (isMatherDayCake) {
+                groupsArr = [
+                    {
+                        groupStr: '20005',
+                        reviewImgId: '01'
+                    },
+                    {
+                        groupStr: '20010',
+                        reviewImgId: '02'
+                    },
+                    {
+                        groupStr: '20005|30005',
+                        reviewImgId: '03'
+                    },
+                    {
+                        groupStr: '20010|30005',
+                        reviewImgId: '04'
+                    },
+                    {
+                        groupStr: '20005|30010',
+                        reviewImgId: '05'
+                    },
+                    {
+                        groupStr: '20010|30010',
+                        reviewImgId: '06'
+                    }
+                ];
+            } else if (isHappyCake) {
+                groupsArr = [
+                    {
+                        groupStr: '2005',
+                        reviewImgId: '01'
+                    },
+                    {
+                        groupStr: '2010',
+                        reviewImgId: '02'
+                    },
+                    {
+                        groupStr: '2015',
+                        reviewImgId: '03'
+                    },
+                    {
+                        groupStr: '2005|3005',
+                        reviewImgId: '04'
+                    },
+                    {
+                        groupStr: '2010|3005',
+                        reviewImgId: '05'
+                    },
+                    {
+                        groupStr: '2015|3005',
+                        reviewImgId: '06'
+                    },
+                    {
+                        groupStr: '2005|3010',
+                        reviewImgId: '07'
+                    },
+                    {
+                        groupStr: '2010|3010',
+                        reviewImgId: '08'
+                    },
+                    {
+                        groupStr: '2015|3010',
+                        reviewImgId: '09'
+                    }
+
+                ];
+            }
+
+            function checkSelect() {
+                // spec_motherDay  母亲节蛋糕磅数参数
+                var cakeParams = {}, spec_motherDay = null;
+                if (isMatherDayCake) {
+                    spec_motherDay = goods.postId == matherDayCake[0] ? 40005 : 40010;
+                }
+                if (id_step1 && id_step2 && id_step3) {
+                    cakeParams.step = 3;
+                    cakeParams.value = id_step1 + '|' + id_step2 + '|' + id_step3 + (spec_motherDay ? '|' + spec_motherDay : '');
+                } else {
+                    cakeParams.value = id_step2 + (id_step3 ? '|' + id_step3 : '');
+                }
+                return cakeParams;
+            }
+
+            function setReviewImg(str) {
+                var currentGroup = groupsArr.filter(function (item) {
+                        return item.groupStr == str;
+                    })[0], imgDirectory = isMatherDayCake ? 'motherDay' : 'happyCake',
+                    imgUrl = staticUrl + 'images/goods/' + imgDirectory + '/group_' + currentGroup.reviewImgId + '.png';
+                $('#happycakeReviewImg').attr('src', imgUrl);
+            }
+
+            function getMyCake(postId, data) {
+                loading.show();
+                $.ajax({
+                    url: '/goods/happy-cake.html',
+                    data: {
+                        postID: postId,
+                        happyKey: data
+                    }
+                }).done(function (res) {
+                    if (res.error === 0) {
+                        cakeInfo = res.data || {};
+                        var currentItemInfo = cakeInfo.productSpecs.filter(function (item) {
+                            return item.displaySpec == goods.displaySpec;
+                        })[0];
+                        var tableware = parseInt(currentItemInfo.specialDinnerware) || parseInt(currentItemInfo.dinnerware),
+                            goodsLength = parseInt(currentItemInfo.length),
+                            goodsWidth = parseInt(currentItemInfo.width),
+                            goodsHeight = parseInt(currentItemInfo.height),
+                            goodsWeight = currentItemInfo.weight,
+                            str = '';
+                        if (goodsLength && goodsWidth && goodsHeight) {
+                            str = '<i></i>约' + goodsLength + 'x' + goodsWidth + 'x' + goodsHeight + 'cm';
+                        } else if (goodsLength && goodsWidth) {
+                            str = '<i></i>约' + goodsLength + 'x' + goodsWidth + 'cm';
+                        } else if (goodsLength && goodsHeight) {
+                            str = '<i></i>约' + goodsLength + 'x' + goodsHeight + 'cm';
+                        }
+                        $('.size').html(str);
+                        $('.tableware').html('<i></i>含' + tableware + '套餐具');
+                        $('.weight').html('<i></i>约' + goodsWeight + 'g');
+                        $('.spec.happyCake').removeClass('hide');
+
+                    } else {
+                        $.toast(res.msg);
+                    }
+                }).always(function () {
+                    loading.hide();
+                });
+            }
+
+            $('.item_step ul > li').click(function () {
+                var step = parseInt($(this).parents('.item_step').attr('data-step')),
+                    happyParams = '',
+                    step1_msg = isMatherDayCake ? '请选择蛋糕坯' : '请选择快乐因子',
+                    step2_msg = isMatherDayCake ? '请选择慕斯层' : '请选择开心能量';
+                if (step === 1) {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    id_step2 = parseInt($(this).attr('data-id'));
+                } else if (step === 2) {
+                    if (id_step2) {
+                        id_step3 = parseInt($(this).attr('data-id'));
+                        $(this).addClass('active').siblings().removeClass('active');
+                    } else {
+                        $.toast(step1_msg);
+                        return;
+                    }
+                } else if (step === 3) {
+                    if (id_step2 && id_step3) {
+                        id_step1 = parseInt($(this).attr('data-id'));
+                        $(this).addClass('active').siblings().removeClass('active');
+                    } else if (!id_step2) {
+                        $.toast(step1_msg);
+                        return;
+                    } else {
+                        $.toast(step2_msg);
+                        return;
+                    }
+                }
+                happyParams = checkSelect();
+                // 设置选择蛋糕胚和慕斯过程中的预览图
+                if (happyParams.step != 3 && happyParams.value) {
+                    setReviewImg(happyParams.value);
+                }
+                // 设置成品预览图及获取成品sku (成品预览图只有三种)
+                if (happyParams.step === 3) {
+                    var color_id = '',
+                        imgDirectory = isMatherDayCake ? 'motherDay' : 'happyCake',
+                        imgUrl = '';
+                    if (isMatherDayCake) {
+                        color_id = happyParams.value.indexOf('30005') > -1 ? 'white' : 'pink';
+                    } else {
+                        color_id = happyParams.value.indexOf('1005') > -1 ? 'blue' : happyParams.value.indexOf('1010') > -1 ? 'pink' : 'yellow';
+                    }
+                    imgUrl = staticUrl + 'images/goods/' + imgDirectory + '/' + color_id + '.png'
+                    $('#happycakeReviewImg').attr('src', imgUrl);
+                    getMyCake($('#uid').val(), happyParams.value);
+                }
+            });
+        }
+    })();
+
+
+    /**  牛奶周周配 制作 **/
+
+    (function () {
+        if (isMilkDiy) {
+            milkDiyApp = new Vue({
+                el: '#milkDiyApp',
+                data: {
+                    milkDiyGoodsList: [],
+                    milkDiySelectedGoodsId: goods.postId,
+                    milkDiySelectedCount: -1,                       //当前选择的瓶数
+                    milkDiySelectedWeeklyCount: -1                //当前选中的几周商品
+                },
+                created: function () {
+                    this.createMilkDiyList();
+                },
+                methods: {
+                    //构造要用的列表数据
+                    createMilkDiyList: function () {
+                        var self = this,
+                            specList = goods.productSpecs || [],
+                            milkDiyGoodsList = [],
+                            weeklyList = [],
+                            milkDiySelectedGoodsId = self.milkDiySelectedGoodsId;
+                        specList.forEach(function (item) {
+                            var weeklyCount = item.weeklySkuCount,
+                                goods = {
+                                    sku_id: item.postId,
+                                    count: item.weeklySkuAmount,
+                                    weeklyCount: weeklyCount,         //周数
+                                    salePrice: item.salePrice,
+                                    preferentialPrice: item.preferentialPrice,
+                                    marketPrice: item.marketPrice
+                                };
+                            if ($.inArray(weeklyCount, weeklyList) === -1) {
+                                weeklyList.push(weeklyCount);
+                                milkDiyGoodsList.push({
+                                    weeklyCount: weeklyCount,
+                                    list: [goods]
+                                });
+                            } else {
+                                milkDiyGoodsList.forEach(function (list) {
+                                    if (list.weeklyCount === weeklyCount) {
+                                        list.list.push(goods);
+                                    }
+                                });
+                            }
+                        });
+                        milkDiyGoodsList.sort(function (a, b) {
+                            return a.weeklyCount - b.weeklyCount;
+                        });
+                        milkDiyGoodsList.forEach(function (item) {
+                            item.list.sort(function (a, b) {
+                                return a.count - b.count;
+                            });
+                        });
+                        this.milkDiyGoodsList = milkDiyGoodsList;
+                        var weeklyCount = milkDiyGoodsList[0].weeklyCount,
+                            count = milkDiyGoodsList[0].count;
+                        if (milkDiySelectedGoodsId) {
+                            milkDiyGoodsList.forEach(function (item) {
+                                item.list.forEach(function (goodsItem) {
+                                    if (goodsItem.sku_id === milkDiySelectedGoodsId) {
+                                        weeklyCount = item.weeklyCount;
+                                        count = goodsItem.count;
+                                    }
+                                });
+                            });
+                        }
+                        self.milkDiySelectedWeeklyCount = weeklyCount;
+                        self.milkDiySelectedCount = count;
+                    }
+                },
+                watch: {
+                    //切换周数更新商品
+                    milkDiySelectedList: function (list) {
+                        var self = this,
+                            isExists = list.some(function (item) {
+                                return item.count === self.milkDiySelectedCount;
+                            });
+                        if (!isExists) {
+                            this.milkDiySelectedCount = list[0].count;
+                        }
+                    },
+
+                    //切换商品时更换当前商品详情
+                    milkDiySelectedGoods: function (val) {
+                        setGoodsInfo(val);
+                        var info = goods.productSpecs.filter(function (item) {
+                            return item.postId === val.sku_id;
+                        });
+                        cakeInfo = info.length ? info[0] : null;
+                    }
+                },
+                computed: {
+                    //当前选择的商品
+                    milkDiySelectedGoods: function () {
+                        var self = this,
+                            goods = {};
+                        this.milkDiyGoodsList.forEach(function (item) {
+                            if (item.weeklyCount === self.milkDiySelectedWeeklyCount) {
+                                item.list.forEach(function (goodsItem) {
+                                    if (goodsItem.count === self.milkDiySelectedCount) {
+                                        goods = goodsItem;
+                                    }
+                                });
+                            }
+                        });
+                        return goods;
+                    },
+                    //当前选中周可选瓶数
+                    milkDiySelectedList: function () {
+                        var list = [],
+                            weeklyCount = this.milkDiySelectedWeeklyCount;
+                        this.milkDiyGoodsList.forEach(function (item) {
+                            if (weeklyCount === item.weeklyCount) {
+                                list = item.list;
+                            }
+                        });
+                        return list;
+                    }
+                }
+            });
+        }
+    })();
+
+
+    //主图轮播
+    carouselSwiper = new Swiper('#goodsImg', {
+        autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: false
+        },
+        speed: 500,
+        loop: !isDigital,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        observer: true,
+        observeParents: true,
+        paginationClickable: true,
+        autoplayDisableOnInteraction: false
+    });
+
+    //加入购物车
+    $('#cartAdd,#cartAdd1').click(function () {
+        _addCart(false, false);
+    });
+    //立即购买
+    $('#buyNow,#buyNow1').click(function () {
+        var toOrder = parseInt($(this).attr('data-toOrder'));
+        _addCart(true, $(this).text().trim() === '立即兑换' || toOrder === 1);
+    });
+    // 储值卡、专享兑换券商品
+    $('.buyVirtual').click(function () {
+        app_js.buyItem($('#uid').val(), 1, true);
+    });
+
+    function _addCart(isQuickBuy, isDuihuan) {
+        if ((isHappyCake || isMatherDayCake || isMilkDiy) && !cakeInfo) {
+            if (isMilkDiy) {
+                $.toast(milkDiyMessage);
+            } else {
+                $.toast('请完成所有魔法选择');
+            }
+            return;
+        }
+        var params = [{
+            sku_id: !(isHappyCake || isMatherDayCake || isMilkDiy) ? $('#uid').val() : isMilkDiy ? cakeInfo.postId : cakeInfo.uid,
+            amount: 1,
+            checked: 1
+        }], fn = {};
+        //如果是数字蛋糕
+        if ($('#numCakeTab').length) {
+            params = [];
+            var currentItem = $('#numCakeTab .tab_item.active'),
+                label = currentItem.attr('data-label'),
+                goodsName = currentItem.attr('data-name') || '',
+                isConstellation = currentItem.attr('data-isConstellation'),
+                id = currentItem.attr('data-id');
+            if (label.length > 1 && !isConstellation) {
+                if (goodsName.indexOf('怦然心动') != -1) {
+                    params.push({
+                        sku_id: id,
+                        amount: 1,
+                        checked: 1
+                    });
+                } else {
+                    var labelArr = label.split('');
+                    $('#numCakeTab .tab_item').each(function () {
+                        var me = $(this),
+                            label = me.attr('data-label'),
+                            id = me.attr('data-id');
+                        if ($.inArray(label, labelArr) !== -1) {
+                            params.push({
+                                sku_id: id,
+                                amount: 1,
+                                checked: 1
+                            });
+                        }
+                    });
+                }
+            } else {
+                params.push({
+                    sku_id: id,
+                    amount: 1,
+                    checked: 1
+                });
+            }
+        }
+        if (!isQuickBuy) {
+            fn.success = function () {
+                $.alert('加入购物车成功', {autoClose: true});
+            }
+        }
+        $('.group_item').each(function () {
+            var me = $(this);
+            if (me.hasClass('active')) {
+                params.push({
+                    sku_id: me.attr('data-uid'),
+                    amount: 1,
+                    checked: 1
+                });
+            }
+        });
+        if (!isDuihuan) {
+            app_js.buyItem(params, null, false, fn);
+        } else {
+            app_js.buyItem(params, null, true);
+        }
+    }
+
+    //点击音乐icon跳转音乐说明
+    $('#audioTips').click(function () {
+        var dom = $('.audio_desc');
+        if (dom.length) {
+            $('html, body').animate({scrollTop: dom.offset().top - $('.global_header').height()}, 500);
+        }
+    });
+    //商品评论
+    (function () {
+        //获取商品评论
+        $.ajax({
+            method: 'get',
+            url: '/goods/get-comment.html',
+            data: {
+                twoPostID: $('#twoPostId').val(),
+                type: 1,
+                pageCount: 100
+            }
+        }).done(function (data) {
+            if (data.list && data.total > 0) {
+                var hotComment = '',
+                    allComment = '',
+                    li = '',
+                    html = '',
+                    len = data.list.length;
+                for (var i = 0; i < len; i++) {
+                    li = data.list[i];
+
+                    // 设置评论头像，根据评论用户手机号后四位生成随机数，从所有蛋糕列表图中随意选取一张所以评论头像
+                    if (li.creator) {
+                        var baseNum = parseInt(li.pcustid);
+                        li.avatar = avatarList[baseNum % avatarList.length];
+                    } else {
+                        li.avatar = avatarList[utils.rand(0, avatarList.length - 1)];
+                    }
+
+                    //上传图片
+                    var imgList = '';
+                    if (li.imgList) {
+                        imgList = '<div class="info upload_wrap commented clear_fix">';
+                        $.each(li.imgList, function (i, v) {
+                            imgList += '<div class="upload_item">' +
+                                '<div class="div_img">' +
+                                '<img src="' + GlobalConfig.staticUrl + 'images/grey.gif" data-original="' + v.thumbnail_img + '" data-src="' + v.original_img + '">' +
+                                '</div>' +
+                                '<div class="show_wrap"><a href="javascript:void(0)" class="upload_show"></a></div>' +
+                                '</div>';
+                        });
+                        imgList += '</div>';
+                    }
+                    var reply = '';
+                    if (li.reply) {
+                        reply = '<div class="info reply_info">' +
+                            '<p class="clear_fix comment_title">' +
+                            '<span class="comment_username">[ 小诺回复 ]</span>' +
+                            '<span class="comment_username"></span>' +
+                            '<span class="comment_date" style="color: #949494;">' + li.replyTime.substring(0, 10) + '</span>' +
+                            '</p>' +
+                            '<p>' + li.reply + '</p>' +
+                            '</div>';
+                    }
+                    html = '<li class="clear_fix' + (i > 9 ? ' hide' : '') + '">' +
+                        '<div class="img_wrap f_left">' + '<img src="' + li.avatar + '">' + '</div>' +
+                        '<div class="info">' +
+                        '<p class="clear_fix comment_title">' +
+                        '<span class="comment_username">' + li.creator + '</span>' +
+                        '<span class="comment_spec">规格：' + li.displaySpec + '</span>' +
+                        '<span class="comment_date">' + li.createTime + '</span>' +
+                        '</p>' +
+                        '<p>' + li.content + '</p>' +
+                        '</div>' +
+                        imgList +
+                        reply +
+                        '</li>';
+                    if (i < 2) {
+                        hotComment += html;
+                    }
+                    allComment += html;
+                }
+                $('#hotComment').html('<div class="hot_comment">' +
+                    '<h4><i></i>用户评论</h4>' +
+                    '<ul class="comment_list">' + hotComment + '</ul>' +
+                    '<p class="text_center"><a href="javascript:void(0)" class="more" id="moreComment">更多评论+</a></p>' +
+                    '</div>');
+                $('#allComment .comment_wrap').append(
+                    '<div class="all_comment">' +
+                    '<ul class="comment_list">' + allComment + '</ul>' +
+                    '</div>');
+                $('.upload_item').imageShow();
+
+                $('.goods_fixed .comment_count').text('(' + len + ')');
+                // 如果有评论
+                if (len && len > 0) {
+                    // 展示右侧的资源位
+                    $('#allComment .top,.resource_wrap').removeClass('hide');
+                    // 显示底部更多icon
+                    if (len > 10) {
+                        $('#allComment .btn_wrap').removeClass('hide');
+                    }
+                }
+            }
+        });
+        $(document).on('click', '#moreComment', function () {
+            $('html, body').animate({scrollTop: $('#allComment').offset().top - $('.global_header').height()}, 800);
+        });
+        $(document).on('click', '#toggleMoreComment', function () {
+            var all_comment = $(this).parents('#allComment').find('.all_comment');
+            if (all_comment.hasClass('active')) {
+                all_comment.removeClass('active').find('li:gt(4)').addClass('hide');
+                $(this).removeClass('active')
+            } else {
+                all_comment.addClass('active').find('li:gt(4)').removeClass('hide');
+                $(this).addClass('active')
+            }
+        });
+    })();
+
+    //数字蛋糕
+    $('.tab_item').click(function () {
+        var me = $(this);
+        me.addClass('active').siblings().removeClass('active');
+        setNumCake();
+    });
+    setNumCake();
+
+    function setNumCake() {
+        $('.tab_item').each(function () {
+            var me = $(this);
+            if (me.hasClass('active')) {
+                var price = me.attr('data-price'),
+                    image = me.attr('data-image'),
+                    currentId = me.attr('data-id'),
+                    mainIndex = parseInt(me.attr('data-mainIndex')),  // 主商品索引
+                    appendPicSize = parseInt(me.attr('data-appendPicSize')) || 0,  // 主商品与第一个列表商品之间插了几张图
+                    name = me.attr('data-name'),
+                    spec = me.attr('data-spec'),
+                    tableware = me.attr('data-tableware'),
+                    goodsLength = parseInt(me.attr('data-goodsLength')),
+                    goodsWidth = parseInt(me.attr('data-goodsWidth')),
+                    goodsHeight = parseInt(me.attr('data-goodsHeight')),
+                    goodsWeight = parseInt(me.attr('data-goodsWeight')),
+                    vipPrice = parseInt(me.attr('data-vipPrice'));
+                $('.group_buy .goods_main_img img').prop('src', image);
+                $('.group_buy .goods_name').text(name);
+                $('#goodsTitle').text(name);
+                $('#goodsPrice').text(price);
+                // 顶部悬浮商品属性设置
+                $('.goods_fixed .goods_name').text(name);
+                $('.goods_fixed .price i').text(price);
+                $('.goods_fixed .people i').text(spec);
+
+                if (vipPrice) {
+                    $('#goodsVipPrice').removeClass('hide').find('span').text(vipPrice);
+                    $('#goodsActivateVipBtn').removeClass('hide');
+                } else {
+                    $('#goodsVipPrice').addClass('hide');
+                    $('#goodsActivateVipBtn').addClass('hide');
+                }
+                // 点击tab切换轮播图和规格描述
+                var _index = me.index();
+                if (currentId == 106883) {
+                    // carouselSwiper.slideTo(1);
+                    $('#bread_type01').removeClass('hide').siblings('.bread_spec').addClass('hide');
+                } else if (currentId == 106880) {
+                    // carouselSwiper.slideTo(2);
+                    $('#bread_type02').removeClass('hide').siblings('.bread_spec').addClass('hide');
+                } else if (currentId == 106876) {
+                    // carouselSwiper.slideTo(3);
+                    $('#bread_type03').removeClass('hide').siblings('.bread_spec').addClass('hide');
+                } else {
+                    var str = '';
+                    if (goodsLength && goodsWidth && goodsHeight) {
+                        str = '<i></i>约' + goodsLength + 'x' + goodsWidth + 'x' + goodsHeight + 'cm';
+                    } else if (goodsLength && goodsWidth) {
+                        str = '<i></i>约' + goodsLength + 'x' + goodsWidth + 'cm';
+                    } else if (goodsLength && goodsHeight) {
+                        str = '<i></i>约' + goodsLength + 'x' + goodsHeight + 'cm';
+                    }
+                    $('.size').html(str);
+                    $('.tableware').html('<i></i>含' + tableware + '套餐具');
+                    $('.weight').html('<i></i>约' + goodsWeight + 'g');
+                    if (_index === mainIndex) {
+                        carouselSwiper.slideTo(0);
+                    } else if (_index < mainIndex) {
+                        carouselSwiper.slideTo(_index + appendPicSize + 1);
+                    } else {
+                        carouselSwiper.slideTo(_index + appendPicSize);
+                    }
+                }
+            }
+        });
+    }
+
+    // 监听页面滚动,展示顶部商品悬浮栏
+    $(document).on('scroll', function () {
+        if ($(this).scrollTop() >= 760) {
+            $('.goods_fixed').removeClass('hide');
+        } else {
+            $('.goods_fixed').addClass('hide');
+        }
+    });
+    $('.goods_fixed .goods_comment').click(function () {
+        $('html, body').animate({scrollTop: $('#allComment').offset().top - 230}, 500);
+    });
+    $('.goods_fixed .goods_hot').click(function () {
+        $('html, body').animate({scrollTop: $('.recommend').offset().top - 230}, 500);
+    });
+
+    //加价购
+    checkGroupStatus();
+    $('.add_group').click(function () {
+        var isMilk = $(this).attr('data-isMilk'), sellOut = $(this).attr('data-sellOut');
+        // 库存牛奶售罄
+        if (isMilk && sellOut) {
+            return;
+        }
+        $(this).parents('.group_item').toggleClass('active');
+        checkGroupStatus();
+    });
+    if ($('.group_list_wrap').hasClass('need_swiper')) {
+        new Swiper('#groupList', {
+            slidesPerView: 'auto',
+            slidesPerColumn: 1,
+            spaceBetween: 0,
+            slidesPerGroup: 4,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+    }
+});
+
+function checkGroupStatus() {
+    var groupCount = $('.group_item.active').length;
+    $('#groupBuyCount').text(groupCount);
+    var itemPrice = parseFloat($('#goodsPrice').text()),
+        totalPrice = itemPrice;
+    $('.group_item.active').each(function () {
+        totalPrice += parseFloat($(this).attr('data-price'));
+    });
+    $('#totalGroupPrice').text(parseFloat(utils.currency(totalPrice)));
+}
+
+//促销文案标签与详情切换展示
+function hoverChange() {
+    $('#promotion').hover(function () {
+        $('.promotion2').removeClass('hide');
+    }, function () {
+        $('.promotion2').addClass('hide');
+    })
+}
