@@ -36,4 +36,23 @@ public class MilkController implements MilkServiceApi {
     public void addCake(@RequestBody LecakeCake lecakeCake) {
         cakeService.addCake(lecakeCake);
     }
+
+    @Override
+    public List<LecakeCake> queryCake() {
+
+        return cakeService.queryCake();
+    }
+
+    @Override
+    public List<LecakeCake> queryCakeById(@RequestBody Integer cakeId) {
+
+        return cakeService.queryCakeById(cakeId);
+    }
+
+    @Override
+    public List<LecakeCake> queryredisCake() {
+        return cakeService.queryredisCake();
+    }
+
+
 }

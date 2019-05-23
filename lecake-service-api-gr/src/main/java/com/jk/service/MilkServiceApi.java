@@ -21,4 +21,16 @@ public interface MilkServiceApi {
 
     @RequestMapping("addCake")
     void addCake(@RequestBody LecakeCake lecakeCake);
+
+    @RequestMapping("queryCake")
+    @ResponseBody
+    List<LecakeCake> queryCake();
+
+    @RequestMapping("queryCakeById")
+    @ResponseBody
+    List<LecakeCake> queryCakeById(@RequestBody Integer cakeId);
+
+    @RequestMapping("queryredisCake")
+    @ResponseBody
+    List<LecakeCake> queryredisCake();
 }

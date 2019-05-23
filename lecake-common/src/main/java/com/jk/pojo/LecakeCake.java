@@ -1,6 +1,8 @@
 package com.jk.pojo;
 
-public class LecakeCake {
+import java.io.Serializable;
+
+public class LecakeCake implements Serializable {
       //Id
       private  Integer   cakeId;
       //图片
@@ -20,6 +22,81 @@ public class LecakeCake {
       //食用 人数Id
       private  Integer   numberId;
 
+    private String bulk ;
+    private String numberName ;
+    private String sweetness ;
+    private String tableware ;
+    private String weight ;
+    private String wannengname;
+
+    @Override
+    public String toString() {
+        return "LecakeCake{" +
+                "cakeId=" + cakeId +
+                ", cakeImg='" + cakeImg + '\'' +
+                ", price=" + price +
+                ", cakeName='" + cakeName + '\'' +
+                ", promotionId=" + promotionId +
+                ", foodId=" + foodId +
+                ", flavorId=" + flavorId +
+                ", flavorName='" + flavorName + '\'' +
+                ", numberId=" + numberId +
+                ", bulk='" + bulk + '\'' +
+                ", numberName='" + numberName + '\'' +
+                ", sweetness='" + sweetness + '\'' +
+                ", tableware='" + tableware + '\'' +
+                ", weight='" + weight + '\'' +
+                ", wannengname='" + wannengname + '\'' +
+                '}';
+    }
+
+    public String getNumberName() {
+        return numberName;
+    }
+
+    public void setNumberName(String numberName) {
+        this.numberName = numberName;
+    }
+
+    public String getSweetness() {
+        return sweetness;
+    }
+
+    public void setSweetness(String sweetness) {
+        this.sweetness = sweetness;
+    }
+
+    public String getTableware() {
+        return tableware;
+    }
+
+    public void setTableware(String tableware) {
+        this.tableware = tableware;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getWannengname() {
+        return wannengname;
+    }
+
+    public void setWannengname(String wannengname) {
+        this.wannengname = wannengname;
+    }
+
+    public String getBulk() {
+        return bulk;
+    }
+
+    public void setBulk(String bulk) {
+        this.bulk = bulk;
+    }
 
     public Integer getCakeId() {
         return cakeId;
@@ -93,18 +170,4 @@ public class LecakeCake {
         this.numberId = numberId;
     }
 
-    @Override
-    public String toString() {
-        return "LecakeCake{" +
-                "cakeId=" + cakeId +
-                ", cakeImg='" + cakeImg + '\'' +
-                ", price=" + price +
-                ", cakeName='" + cakeName + '\'' +
-                ", promotionId=" + promotionId +
-                ", foodId=" + foodId +
-                ", flavorId=" + flavorId +
-                ", flavorName='" + flavorName + '\'' +
-                ", numberId=" + numberId +
-                '}';
-    }
 }

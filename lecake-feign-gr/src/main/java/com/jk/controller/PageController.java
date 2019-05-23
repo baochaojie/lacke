@@ -20,4 +20,11 @@ public class PageController {
     public String toLecakeRoll(){
         return "lecakeRoll";
     }
+
+    //购物车页面
+    @RequestMapping("toGouwuche")
+    public String toGouwuche(){
+
+        return "gouwuche";
+    }
 }
