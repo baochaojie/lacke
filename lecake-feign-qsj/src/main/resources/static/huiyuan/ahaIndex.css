@@ -1,0 +1,303 @@
+@charset "UTF-8";
+.main_container_index .main {
+  background: #fefdfc;
+  position: relative;
+  width: 100%;
+}
+.main_container_index .main .top {
+  height: 100px;
+  background: #fff;
+  width: 1200px;
+  margin: 0 auto;
+}
+.main_container_index .main .top .avatar {
+  width: 60px;
+  border-radius: 50%;
+  float: left;
+  margin: 20px 25px 0 100px;
+}
+.main_container_index .main .top .right {
+  float: left;
+}
+.main_container_index .main .top .level {
+  margin-left: 10px;
+  padding: 0 4px;
+  height: 18px;
+  background: #ff4001;
+  color: #ffffff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+.main_container_index .main .top .out_date {
+  color: #b6b7b8;
+}
+.main_container_index .main .top .cutDown {
+  padding-top: 25px;
+  color: #d6ae7c;
+  text-decoration: underline;
+  text-decoration-color: #d6ae7c;
+}
+.main_container_index .main .top .vipInfo {
+  margin-top: 32px;
+}
+.main_container_index .main .top .vipInfo h3 {
+  font-size: 14px;
+}
+.main_container_index .main .top .vipInfo .out_date {
+  font-size: 12px;
+}
+.main_container_index .main .top .noVipInfo {
+  padding-top: 24px;
+  font-size: 16px;
+}
+.main_container_index .main .top .noVipInfo .buy_aha {
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  color: #ff4001;
+  margin-top: 5px;
+}
+.main_container_index .main .top .login_wrap {
+  margin-top: 37px;
+  font-size: 15px;
+  padding: 5px 10px;
+  color: #fff;
+  background: #ff4001;
+}
+.main_container_index .main .top .aha_logo {
+  width: 118px;
+  height: 51px;
+  padding: 25px 40px 0 0;
+}
+.main_container_index .main .banner .banner_old_aha .banner_1 {
+  height: 716px;
+  background: url("../images/aha/index/old_aha.jpg") no-repeat center;
+}
+.main_container_index .main .banner .banner_old_aha .banner_1 .price_wrap {
+  position: absolute;
+  top: 574px;
+  left: 50%;
+  margin-left: 100px;
+  width: 137px;
+  height: 121px;
+  text-align: center;
+  font-size: 26px;
+  color: #c33a17;
+  padding-top: 25px;
+  font-weight: bold;
+}
+.main_container_index .main .banner .banner_old_aha .banner_1 .price_wrap .price {
+  height: 36px;
+  line-height: 36px;
+}
+.main_container_index .main .banner .banner_old_aha .banner_2 {
+  height: 60px;
+  background: url("../images/aha/index/yinying.jpg") no-repeat center;
+}
+.main_container_index .main .banner .banner_no_aha {
+  height: 735px;
+  background: url("../images/aha/index/no_aha.jpg") no-repeat center;
+  position: relative;
+}
+.main_container_index .main .banner .banner_no_aha .price_wrap {
+  position: absolute;
+  top: 481px;
+  left: 50%;
+  margin-left: 100px;
+  width: 137px;
+  height: 121px;
+  text-align: center;
+  font-size: 26px;
+  color: #fff;
+}
+.main_container_index .main .banner .banner_no_aha .price_wrap .price {
+  padding-top: 65px;
+  position: relative;
+  height: 26px;
+  line-height: 26px;
+}
+.main_container_index .main .banner .banner_no_aha .price_wrap .price:before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 29px;
+  top: 30px;
+  left: 49.5%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  background: url("../images/aha/index/logo_371.png?01") no-repeat center;
+}
+.main_container_index .main .banner .new_aha {
+  padding-top: 60px;
+}
+.main_container_index .main .interests .interests_1 {
+  height: 400px;
+  background: url("../images/aha/index/interests_1.jpg") no-repeat center;
+}
+.main_container_index .main .interests .interests_2 {
+  height: 520px;
+  background: url("../images/aha/index/interests_2.jpg?01") no-repeat center;
+}
+.main_container_index .main .interests .interests_3 {
+  position: relative;
+  height: 618px;
+  background: url("../images/aha/index/interests_3.jpg") no-repeat center;
+}
+.main_container_index .main .interests .interests_3 .aha_account {
+  position: absolute;
+  top: 117px;
+  left: 50%;
+  margin-left: 188px;
+  font-size: 16px;
+  color: #fff;
+}
+.main_container_index .main .interests .interests_3 .aha_account p {
+  height: 40px;
+  line-height: 40px;
+}
+.main_container_index .main .interests .interests_3 #openRules {
+  position: absolute;
+  text-decoration: underline;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  font-size: 16px;
+  color: #888;
+}
+.main_container_index .main .interests .rules_pop {
+  position: fixed !important;
+  padding: 0;
+  left: 0;
+  top: 0;
+  width: 100% !important;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+}
+.main_container_index .main .interests .rules_pop .pop_content {
+  position: relative;
+  width: 512px !important;
+  height: 42%;
+  background: #ffffff;
+  padding: 40px 16px 24px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  line-height: 1.8;
+  overflow: hidden;
+}
+.main_container_index .main .interests .rules_pop .pop_content .close_btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 0;
+  top: 0;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+.main_container_index .main .interests .rules_pop .pop_content .close_btn:before {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: url(../images/icons_1.png) center no-repeat;
+  background-position: -250px -100px;
+  content: '';
+  left: 50%;
+  margin-left: -25px;
+  top: 50%;
+  margin-top: -25px;
+}
+.main_container_index .main .interests .rules_pop .pop_content .rules_title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  text-align: center;
+  color: #3e3e3e;
+  font-weight: bolder;
+}
+.main_container_index .main .interests .rules_pop .pop_content .rules {
+  margin-top: 12px;
+  max-height: 84%;
+  overflow-y: auto;
+  font-size: 14px;
+}
+.main_container_index .main .interests .rules_pop .pop_content .rules h3 {
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  font-weight: bolder;
+}
+.main_container_index .main .interests .rules_pop .pop_content .rules h3 span {
+  font-weight: normal;
+  font-size: inherit;
+}
+.main_container_index .main .interests .rules_pop .pop_content .rules span {
+  font-size: inherit;
+}
+.main_container_index .main .bottom_link {
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+.main_container_index .main .bottom_link .buy_btn {
+  display: inline-block;
+  width: 260px;
+  height: 50px;
+  background: #c19960;
+  color: #fff;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 16px;
+  position: relative;
+}
+.main_container_index .main .bottom_link .buy_btn .normal_aha_price {
+  text-decoration: line-through;
+  display: inline-block;
+  padding-right: 10px;
+}
+.main_container_index .main .bottom_link .buy_btn:after {
+  position: absolute;
+  content: "";
+  width: 8px;
+  height: 11px;
+  top: 50%;
+  left: 50%;
+  background: url("../images/aha/index/icon_go.png") no-repeat center;
+  background-size: 8px 11px;
+  transform: translate(90px, -50%);
+  -webkit-transform: translate(90px, -50%);
+  -o-transform: translate(90px, -50%);
+  -moz-transform: translate(90px, -50%);
+  -ms-transform: translate(90px, -50%);
+}
+.main_container_index .main .bottom_link .btn_normal {
+  line-height: 50px;
+}
+.main_container_index .main .bottom_link .btn_normal:after {
+  transform: translate(60px, -50%);
+  -webkit-transform: translate(60px, -50%);
+  -o-transform: translate(60px, -50%);
+  -moz-transform: translate(60px, -50%);
+  -ms-transform: translate(60px, -50%);
+}
+.no_container_aha {
+  padding-bottom: 100px;
+}

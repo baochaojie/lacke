@@ -7,6 +7,7 @@ import com.jk.model.ShouhuoBean;
 import com.jk.model.UserBean;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -47,9 +48,18 @@ public interface OrderDao {
             "where  t.id = #{value}")
     List<GoodsBean> goodsinfo(Integer id);
 
-    @Insert("INSERT into  t_shouhuoinfo(phone,area,name,youbian,userid,shouhuodate) values(#{phone},#{area},#{name},#{youbian},#{userid},null)")
+    @Insert("INSERT into  t_shouhuoinfo(phonee,area,name,youbian,userid,shouhuodate) values(#{phonee},#{area},#{name},#{youbian},#{userid},null)")
     void savearea(ShouhuoBean shouhuoBean);
 
     @Select("select  id from  t_user where  phone=#{value}")
     UserBean queryuserid(String userid);
+
+
+    void delcakeById(Integer[] ids);
+
+    @Select("select * from t_shouhuoinfo where  shouhuoid =#{value}")
+    ShouhuoBean queryCakeByid(Integer id);
+
+    @Update("update t_shouhuoinfo set name=#{name},area=#{area},phonee=#{phonee},youbian =#{youbian} where  shouhuoid = #{shouhuoid}")
+    void update(ShouhuoBean shouhuoBean);
 }

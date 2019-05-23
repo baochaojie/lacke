@@ -103,5 +103,26 @@ public class OrderController {
     }
 
 
+    @RequestMapping("delcakeById")
+    @ResponseBody
+    public  Boolean  delcakeById(Integer[]  ids) {
+        try {
 
+            orderService.delcakeById(ids);
+            return  true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 修改地址
+     */
+    @RequestMapping("queryCakeByid")
+    @ResponseBody
+    public  ShouhuoBean  queryCakeByid(Integer  id){
+
+        return  orderService.queryCakeByid(id);
+    }
 }

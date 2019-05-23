@@ -33,4 +33,13 @@ public interface OrderServiceqsj {
     @RequestMapping("queryuserid")
     @ResponseBody
     UserBean queryuserid(@RequestParam("userid") String userid);
+
+
+    @RequestMapping("delcakeById")
+    @ResponseBody
+    void delcakeById(@RequestParam("ids") Integer[] ids);
+
+    @RequestMapping("queryCakeByid")
+    @ResponseBody
+    ShouhuoBean queryCakeByid(@RequestParam("id") Integer id);
 }

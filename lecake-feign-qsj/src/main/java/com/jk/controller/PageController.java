@@ -38,4 +38,21 @@ public class PageController {
         System.out.println("99999999999999");
         return "cakeadd";
     }
+
+
+
+    @RequestMapping("toeditpage")
+    public  String  toeditpage(){
+        System.out.println("11111111111111");
+        return "cakeedit";
+    }
+
+    @RequestMapping("tohuiyuan")
+    public  String  tohuiyuan(){
+        System.out.println("222222222222");
+        return "huiyuan";
+    }
+
+
+
 }

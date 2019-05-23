@@ -1,0 +1,12 @@
+$(function(){
+    $('#login').click(function () {
+        location.href = '/customer/login.html?return_url=' + encodeURIComponent('/aha/index.html');
+    });
+    // 规则查看
+    $('#openRules').click(function () {
+        $('.rules_pop').removeClass('hide');
+    });
+    $('#closeRules').click(function () {
+        $('.rules_pop').addClass('hide');
+    });
+});
