@@ -1,0 +1,126 @@
+@charset "UTF-8";
+.main_goods_list .main {
+  background: #ffffff;
+}
+.main_goods_list .main .filter_wrap {
+  font-size: 14px;
+  background: #f9f9f9;
+  padding: 16px 20px;
+}
+.main_goods_list .main .filter_wrap .wrap {
+  background: #ffffff;
+  padding: 10px 16px;
+}
+.main_goods_list .main .filter_wrap dl {
+  line-height: 36px;
+}
+.main_goods_list .main .filter_wrap dt {
+  width: 70px;
+  float: left;
+}
+.main_goods_list .main .filter_wrap dd {
+  float: left;
+  margin-right: 40px;
+  cursor: pointer;
+}
+.main_goods_list .main .filter_wrap dd:hover {
+  color: #ff4001;
+}
+.main_goods_list .main .filter_wrap dd.active {
+  color: #ff4001;
+}
+.main_goods_list .main .p_list_wrap {
+  padding: 0 20px 40px;
+  background: #f9f9f9;
+}
+.main_goods_list .main .no_content {
+  text-align: center;
+  font-size: 14px;
+  padding: 68px 0 190px;
+}
+.main_goods_list .main .no_content p {
+  margin-top: 40px;
+}
+.main_goods_list .main .no_content a {
+  color: #ff4001;
+  text-decoration: underline;
+}
+.main_goods_list .main.gift_main ul {
+  padding-top: 20px;
+}
+.main_goods_list .main.markup_main .filter_wrap {
+  margin-bottom: 20px;
+}
+.main_goods_list .main.markup_main .filter_wrap .wrap {
+  background: #f9f9f9;
+  padding: 0 16px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag {
+  position: relative;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag i {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: -16px;
+  top: 50%;
+  margin-top: -8px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag i:before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 20px;
+  background: url("../images/icons.png?4") center no-repeat;
+  -webkit-background-size: 400px 400px;
+  -moz-background-size: 400px 400px;
+  background-size: 400px 400px;
+  top: 50%;
+  margin-top: -10px;
+  background-position: -176px -250px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag.price_flag i {
+  right: -22px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag.price_flag i:before {
+  left: 0;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag.price_flag i:after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 20px;
+  background: url("../images/icons.png?4") center no-repeat;
+  -webkit-background-size: 400px 400px;
+  -moz-background-size: 400px 400px;
+  background-size: 400px 400px;
+  top: 50%;
+  margin-top: -10px;
+  background-position: -176px -250px;
+  right: 0;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  margin-top: -12px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag.price_flag.active i.up:before {
+  background-position: -216px -250px;
+}
+.main_goods_list .main.markup_main .filter_wrap .sort_flag.price_flag.active i.down:after {
+  background-position: -216px -250px;
+}
+.main_goods_list .main.markup_main .p_list_wrap h2 {
+  font-size: 16px;
+  font-weight: bold;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 19px;
+}
+.main_goods_list .main.markup_main .p_list_wrap ul {
+  margin-bottom: 20px;
+}
+.main_goods_list .main.search_main .no_content {
+  padding: 60px 0;
+}
