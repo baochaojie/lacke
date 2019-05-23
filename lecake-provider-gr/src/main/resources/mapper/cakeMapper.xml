@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.CakeMapper">
+    <insert id="addCake">
+        insert into t_shop (cakeId) values (#{lecakeCake.cakeId})
+    </insert>
+    <select id="queryCake" resultType="com.jk.pojo.LecakeCake">
+        select
+      c.cakeId as cakeId,
+      c.cakeImg as cakeImg,
+      c.cakeName as cakeName,
+      cn.price    as   price,
+      n.bulk    as bulk,
+      GROUP_CONCAT(n.numberName)as numberName,
+      n.sweetness as sweetness,
+      GROUP_CONCAT(n.tableware)as tableware,
+      n.weight    as weight,
+      f.flavorId  as flavorId,
+      f.flavorName as flavorName
+      FROM
+       cake_number cn  left join lecake_cake c  on  cn.cakeId=c.cakeId
+      left join lecake_number n  on cn.numberId= n.numberId
+      left join lecake_flavor f  on c.flavorId= f.flavorId
+      where c.typecake=1
+      GROUP BY c.cakeId
+    </select>
+</mapper>
