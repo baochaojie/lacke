@@ -19,6 +19,7 @@
         <module>lecake-fegin-wxy</module>
         <module>lecake-provider-wxy</module>
         <module>lecake-service-api-wxy</module>
+        <module>lecake-cake-api</module>
     </modules>
 
 
